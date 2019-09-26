@@ -12,6 +12,7 @@
 		<module>shiro</module>
 		<module>mongodb</module>
 		<module>elsearch</module>
+		<module>rabbitmq</module>
 	</modules>
 
 	<dependencyManagement>
