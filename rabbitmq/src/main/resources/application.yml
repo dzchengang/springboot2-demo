@@ -8,3 +8,8 @@ spring:
         username: root
         password: qwe123-=
         virtual-host: /
+        listener:
+          direct:
+            acknowledge-mode: manual
+          simple:
+            acknowledge-mode: manual

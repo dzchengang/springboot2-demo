@@ -14,9 +14,9 @@ public class TopicReceiver {
 		System.out.println("【receiveTopic1监听到消息】" + user.toString());
 	}
 
-	@RabbitListener(queues = RabbitConfig.TOPIC_QUEUE2)
+	/*@RabbitListener(queues = RabbitConfig.TOPIC_QUEUE2)
 	public void receiveTopic2(User user) {
 		System.out.println("【receiveTopic2监听到消息】" + user.toString());
-	}
+	}*/
 
 }
