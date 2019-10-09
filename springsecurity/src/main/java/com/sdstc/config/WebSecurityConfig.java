@@ -19,17 +19,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
+		http.authorizeRequests() //定义哪些url需要保护，哪些url不需要保护
 		.antMatchers("/", "/home").permitAll()
-		.anyRequest().authenticated()
-		.antMatchers("/hello").hasRole("Role")
+		.antMatchers("/admin").hasRole("ADMIN")
+		.antMatchers("/user").access("hasRole('ADMIN') or hasRole('USER')")
+		.anyRequest().authenticated()//其他url 登录即可访问
 		.and()
 		.formLogin()
-		.loginPage("/login").permitAll()
+		.loginPage("/login").permitAll()//定义当需要用户登录时候，转到的登录页面
 		.and()
 		.logout().permitAll();
 	}
-
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		// 设置userservice 设置 password

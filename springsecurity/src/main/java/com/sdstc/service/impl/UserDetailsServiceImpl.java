@@ -16,14 +16,20 @@ import org.springframework.stereotype.Service;
 @Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
 	@Autowired
-    private PasswordEncoder passwordEncoder;
-	
+	private PasswordEncoder passwordEncoder;
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		List<GrantedAuthority> authorities=new ArrayList<GrantedAuthority>();
-		authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-		User user=new User("cheng",passwordEncoder.encode("111111"),authorities);
+		User user = null;
+		if (username.equals("admin")) {
+			List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+			authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+			user = new User("admin", passwordEncoder.encode("111111"), authorities);
+		} else if (username.equals("user")) {
+			List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+			authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+			user = new User("user", passwordEncoder.encode("111111"), authorities);
+		}
 		return user;
 	}
 
