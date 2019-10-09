@@ -16,6 +16,7 @@
 		<module>tomcat</module>
 		<module>springsecurity</module>
 		<module>springsecurityajax</module>
+		<module>oauth2</module>
 	</modules>
 
 	<dependencyManagement>
