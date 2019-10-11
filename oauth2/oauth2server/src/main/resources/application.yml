@@ -1,8 +1,2 @@
 server:
  port: 8089
-security:
- oauth2:
-  client:
-   client_id: cheng
-   client_secret: $2a$14$fWPBuGmiG3xe2.ORmjpqReVkeeIJt1pi3l3Q9YJjBxmKNKazYOIEK
-   registered-redirect-uri: http://www.baidu.com
