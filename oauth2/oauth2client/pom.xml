@@ -6,7 +6,7 @@
 		<artifactId>oauth2</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>oauth2server</artifactId>
+	<artifactId>oauth2client</artifactId>
 	<packaging>war</packaging>
 
 	<properties>
@@ -46,10 +46,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
 		</dependency>
 	</dependencies>
 </project>

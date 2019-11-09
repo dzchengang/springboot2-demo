@@ -1,0 +1,2 @@
+/oauth/token      TokenEndpoint 
+/oauth/authorize  AuthorizationEndpoint  

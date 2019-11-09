@@ -17,6 +17,7 @@
 		<module>springsecurity</module>
 		<module>springsecurityajax</module>
 		<module>oauth2</module>
+		<module>springmvc</module>
 	</modules>
 
 	<dependencyManagement>

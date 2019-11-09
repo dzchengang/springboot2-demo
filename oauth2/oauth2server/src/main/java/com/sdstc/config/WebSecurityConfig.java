@@ -1,20 +1,34 @@
 package com.sdstc.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+	@Autowired
+	private UserDetailsService userDetailsService;
+	
 	@Bean
-	@Override
-	public UserDetailsService userDetailsService() {
-		return new InMemoryUserDetailsManager(User.withDefaultPasswordEncoder()
-				.username("cheng")
-				.password("111111")
-				.roles("USER").build());
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder(14);
 	}
+	
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		// 设置userservice 设置 password
+		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+	}
+	
+	@Bean
+	public  AuthenticationManager authenticationManager() throws Exception{
+		return super.authenticationManager();
+	}
+	
 }
