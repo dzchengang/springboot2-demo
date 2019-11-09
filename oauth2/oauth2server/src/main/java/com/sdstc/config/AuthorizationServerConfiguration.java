@@ -47,11 +47,9 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	 */
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		/*
-		 * endpoints .tokenStore(new JwtTokenStore(new JwtAccessTokenConverter()))
-		 * .authenticationManager(authenticationManager)
-		 * .userDetailsService(userDetailsService);
-		 */
+		 endpoints .tokenStore(new JwtTokenStore(new JwtAccessTokenConverter()))
+		  .authenticationManager(authenticationManager)
+		  .userDetailsService(userDetailsService);
 		super.configure(endpoints);
 	}
 	

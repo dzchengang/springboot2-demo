@@ -33,7 +33,7 @@ public class ClientDetailsServiceImpl implements ClientDetailsService{
 		//用来标识客户的Id
 		baseClientDetails.setClientId(clientId);
 		//用来标识客户端的安全码
-		baseClientDetails.setClientSecret("111111");
+		baseClientDetails.setClientSecret(passwordEncoder().encode("111111"));
 		
 		//用来限制客户端的访问范围
 		List<String> scopes=new ArrayList<String>();
@@ -63,7 +63,5 @@ public class ClientDetailsServiceImpl implements ClientDetailsService{
 		return new BCryptPasswordEncoder(14);
 	}
 
-	public static void main(String[] args) {
-		System.out.println(new BCryptPasswordEncoder(14).encode("111111"));
-	}
+	
 }
