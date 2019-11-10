@@ -1,2 +1,7 @@
 /oauth/token      TokenEndpoint 
 /oauth/authorize  AuthorizationEndpoint  
+
+WebSecurityConfigurerAdapter与ResourceServerConfigurerAdapter同时在的话且都配置了处理url为：/api/**，默认是后者会生效。
+原因：
+1.因为默认的WebSecurityConfigurerAdapter里的@Order值是100
+2.ResourceServerConfigurerAdapter里的@Order值是3

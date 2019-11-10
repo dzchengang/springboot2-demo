@@ -2,6 +2,7 @@ package com.sdstc.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -10,22 +11,23 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
-
+import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 	@Autowired
 	private ClientDetailsService clientDetailsServiceJdbc;
-	
+
 	@Autowired
-    private AuthenticationManager authenticationManager;
-	
+	private AuthenticationManager authenticationManager;
+
 	@Autowired
 	private UserDetailsService userDetailsService;
-	
+
 	/**
 	 * 用来配置客户端详情服务,客户端详情信息在这里进行初始化
 	 */
@@ -33,7 +35,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	public void configure(ClientDetailsServiceConfigurer configurer) throws Exception {
 		configurer.withClientDetails(clientDetailsServiceJdbc);
 	}
-    
+
 	/**
 	 * 用来配置令牌端点(TokenEndpoint)的安全约束
 	 */
@@ -47,10 +49,18 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	 */
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		 endpoints .tokenStore(new JwtTokenStore(new JwtAccessTokenConverter()))
-		  .authenticationManager(authenticationManager)
-		  .userDetailsService(userDetailsService);
-		super.configure(endpoints);
+		endpoints.tokenStore(tokenStore()).authenticationManager(authenticationManager)
+				.userDetailsService(userDetailsService);
 	}
-	
+
+	public TokenStore tokenStore() {
+		return new JwtTokenStore(jwtTokenEnhancer());
+	}
+
+	private JwtAccessTokenConverter jwtTokenEnhancer() {
+		JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+		converter.setSigningKey("qwe123-=");
+		return converter;
+	}
+
 }

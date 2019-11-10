@@ -29,4 +29,11 @@ public class PubController {
 		result.put("x", "y");
 		return result;
 	}
+	
+	@GetMapping("/test")
+	public Map<String, String> test() {
+		Map<String, String> result = new HashMap<String, String>();
+		result.put("x111", "222y");
+		return result;
+	}
 }
