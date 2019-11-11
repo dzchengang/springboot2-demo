@@ -1,4 +1,4 @@
-package com.sdstc.service.impl;
+package com.sdstc.config;
 
 import java.util.ArrayList;
 import java.util.HashSet;

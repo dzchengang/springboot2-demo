@@ -1,4 +1,4 @@
-package com.sdstc.service.impl;
+package com.sdstc.config;
 
 import java.util.HashMap;
 import java.util.Map;
