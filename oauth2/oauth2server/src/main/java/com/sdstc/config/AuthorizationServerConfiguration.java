@@ -1,20 +1,23 @@
 package com.sdstc.config;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
-import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
+import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
+
+import com.sdstc.service.impl.JWTTokenEnhancer;
 
 @Configuration
 @EnableAuthorizationServer
@@ -26,8 +29,10 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	private AuthenticationManager authenticationManager;
 
 	@Autowired
-	private UserDetailsService userDetailsService;
-
+	private RedisConnectionFactory redisConnectionFactory;
+	@Autowired
+	private JWTTokenEnhancer jwtTokenEnhancer;
+	
 	/**
 	 * 用来配置客户端详情服务,客户端详情信息在这里进行初始化
 	 */
@@ -49,15 +54,27 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	 */
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		endpoints.tokenStore(tokenStore()).authenticationManager(authenticationManager)
-				.userDetailsService(userDetailsService);
+		/*
+		 * endpoints.tokenStore(tokenStore())
+		 * .accessTokenConverter(jwtAccessTokenConverter())
+		 * .authenticationManager(authenticationManager);
+		 */
+		
+		TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+	    tokenEnhancerChain.setTokenEnhancers(
+	    Arrays.asList(jwtTokenEnhancer, jwtAccessTokenConverter()));
+	 
+	    endpoints.tokenStore(tokenStore())
+	             .tokenEnhancer(tokenEnhancerChain)
+	             .authenticationManager(authenticationManager);
+
 	}
 
 	public TokenStore tokenStore() {
-		return new JwtTokenStore(jwtTokenEnhancer());
+		return new RedisTokenStore(redisConnectionFactory);
 	}
 
-	private JwtAccessTokenConverter jwtTokenEnhancer() {
+	private JwtAccessTokenConverter jwtAccessTokenConverter() {
 		JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
 		converter.setSigningKey("qwe123-=");
 		return converter;
