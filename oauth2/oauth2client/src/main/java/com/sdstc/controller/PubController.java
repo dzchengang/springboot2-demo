@@ -24,4 +24,11 @@ public class PubController {
 		result.put("x", "y");
 		return result;
 	}
+	
+	@GetMapping("/callback")
+	public Map<String, String> callback() {
+		Map<String, String> result = new HashMap<String, String>();
+		result.put("callback", "callback");
+		return result;
+	}
 }

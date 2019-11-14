@@ -19,49 +19,52 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * 客户端详情
+ * 
  * @author cheng
  *
  */
 @Service("clientDetailsServiceJdbc")
 @Slf4j
-public class ClientDetailsServiceImpl implements ClientDetailsService{
-	
+public class ClientDetailsServiceImpl implements ClientDetailsService {
+
 	@Override
 	public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
-		log.info("--loadClientByClientId--"+clientId);
-		BaseClientDetails  baseClientDetails=new BaseClientDetails();
-		//用来标识客户的Id
+		log.info("--loadClientByClientId--" + clientId);
+		BaseClientDetails baseClientDetails = new BaseClientDetails();
+		// 用来标识客户的Id
 		baseClientDetails.setClientId(clientId);
-		//用来标识客户端的安全码
+		// 用来标识客户端的安全码
 		baseClientDetails.setClientSecret(passwordEncoder().encode("111111"));
-		
-		//用来限制客户端的访问范围
-		List<String> scopes=new ArrayList<String>();
+
+		// 用来限制客户端的访问范围
+		List<String> scopes = new ArrayList<String>();
 		scopes.add("write");
 		scopes.add("read");
 		baseClientDetails.setScope(scopes);
-		
-		//用来标识客户端使用的授权类型
-		List<String> authorizedGrantTypes=new ArrayList<String>();
+
+		// 用来标识客户端使用的授权类型
+		List<String> authorizedGrantTypes = new ArrayList<String>();
 		authorizedGrantTypes.add("authorization_code");
+		authorizedGrantTypes.add("refresh_token");
 		baseClientDetails.setAuthorizedGrantTypes(authorizedGrantTypes);
-		
-		//此客户端可以使用的权限
-		List<GrantedAuthority> authorities=new ArrayList<GrantedAuthority>();
+
+		// 此客户端可以使用的权限
+		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		authorities.add(new SimpleGrantedAuthority("ADMIN"));
 		authorities.add(new SimpleGrantedAuthority("USER"));
 		baseClientDetails.setAuthorities(authorities);
-		
-		//设置返回地址
-		Set<String> redirectUris=new HashSet<String>();
-		redirectUris.add("http://www.baidu.com");
+
+		// 设置返回地址
+
+		Set<String> redirectUris = new HashSet<String>();
+		redirectUris.add("http://localhost:8081/callback");
 		baseClientDetails.setRegisteredRedirectUri(redirectUris);
+
 		return baseClientDetails;
 	}
-	
+
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder(14);
 	}
 
-	
 }
