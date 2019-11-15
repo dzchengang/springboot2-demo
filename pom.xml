@@ -15,6 +15,7 @@
 		<module>rabbitmq</module>
 		<module>tomcat</module>
 		<module>springsecurity</module>
+		<module>springmvcshiro</module>
 		<module>springsecurityajax</module>
 		<module>oauth2</module>
 		<module>springmvc</module>

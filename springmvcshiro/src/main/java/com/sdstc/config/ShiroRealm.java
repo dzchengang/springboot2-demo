@@ -1,0 +1,41 @@
+package com.sdstc.config;
+
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.AuthenticationInfo;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
+import org.springframework.stereotype.Service;
+
+import com.sdstc.model.User;
+
+@Service("shiroRealm")
+public class ShiroRealm extends AuthorizingRealm {
+
+	@Override
+	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+		authorizationInfo.addRole("admin");
+		authorizationInfo.addStringPermission("all");
+		return authorizationInfo;
+	}
+
+	@Override
+	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+		String account = (String) token.getPrincipal();
+		
+		User userInfo = new User(account,"83a42d2c012f351e449c724cefdc4a1c","111111");
+
+		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(userInfo, // 用户名
+				userInfo.getPassword(),
+				ByteSource.Util.bytes(userInfo.getSalt()),
+				getName()
+		);
+		return authenticationInfo;
+	}
+
+}
