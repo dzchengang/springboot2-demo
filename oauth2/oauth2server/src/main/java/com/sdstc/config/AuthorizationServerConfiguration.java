@@ -3,6 +3,7 @@ package com.sdstc.config;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,7 +31,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	private RedisConnectionFactory redisConnectionFactory;
 	@Autowired
 	private JWTTokenEnhancer jwtTokenEnhancer;
-	
+
 	/**
 	 * 用来配置客户端详情服务,客户端详情信息在这里进行初始化
 	 */
@@ -44,7 +45,8 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	 */
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-		super.configure(security);
+		security.allowFormAuthenticationForClients();
+		security.tokenKeyAccess("isAuthenticated()");
 	}
 
 	/**
@@ -57,22 +59,22 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 		 * .accessTokenConverter(jwtAccessTokenConverter())
 		 * .authenticationManager(authenticationManager);
 		 */
-		
+
 		TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
-	    tokenEnhancerChain.setTokenEnhancers(
-	    Arrays.asList(jwtTokenEnhancer, jwtAccessTokenConverter()));
-	 
-	    endpoints.tokenStore(tokenStore())
-	             .tokenEnhancer(tokenEnhancerChain)
-	             .authenticationManager(authenticationManager);
+		tokenEnhancerChain.setTokenEnhancers(Arrays.asList(jwtTokenEnhancer, jwtAccessTokenConverter()));
+
+		endpoints.tokenStore(jwtTokenStore()).tokenEnhancer(tokenEnhancerChain);
+		// .authenticationManager(authenticationManager);
 
 	}
 
-	public TokenStore tokenStore() {
+	@Bean
+	public TokenStore jwtTokenStore() {
 		return new RedisTokenStore(redisConnectionFactory);
 	}
 
-	private JwtAccessTokenConverter jwtAccessTokenConverter() {
+	@Bean
+	public JwtAccessTokenConverter jwtAccessTokenConverter() {
 		JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
 		converter.setSigningKey("qwe123-=");
 		return converter;

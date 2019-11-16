@@ -55,11 +55,11 @@ public class ClientDetailsServiceImpl implements ClientDetailsService {
 		baseClientDetails.setAuthorities(authorities);
 
 		// 设置返回地址
-
 		Set<String> redirectUris = new HashSet<String>();
-		redirectUris.add("http://localhost:8081/callback");
+		redirectUris.add("http://localhost:8081/login");
 		baseClientDetails.setRegisteredRedirectUri(redirectUris);
 
+		baseClientDetails.isAutoApprove("true");
 		return baseClientDetails;
 	}
 
