@@ -5,3 +5,8 @@ WebSecurityConfigurerAdapter与ResourceServerConfigurerAdapter同时在的话且
 原因：
 1.因为默认的WebSecurityConfigurerAdapter里的@Order值是100
 2.ResourceServerConfigurerAdapter里的@Order值是3
+
+
+jwtTokenStore
+jwtAccessTokenConverter
+要设置bean 因为其他地方会用到
