@@ -10,20 +10,28 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sdstc.model.User;
+
 @RestController
 @RequestMapping("/")
 public class PubController {
 
 	@GetMapping("/login")
-	public Map<String, String> sendReq() {
+	public Map<String, String> login(User user) {
 		Subject subject = SecurityUtils.getSubject();
-		/*
-		 * UsernamePasswordToken token = new
-		 * UsernamePasswordToken(user.getAccount(),AESUtil.decrypt(user.getPassword()),
-		 * "password"); subject.login(token);
-		 */
+		
+		UsernamePasswordToken token = new UsernamePasswordToken(user.getAccount(),user.getPassword()); 
+		subject.login(token);
 		
 		Map<String, String> result=new HashMap<String,String>();
+		return result;
+	}
+	
+	
+	@GetMapping("/test")
+	public Map<String, String> test() {
+		Map<String, String> result=new HashMap<String,String>();
+		result.put("result", "success");
 		return result;
 	}
 }
