@@ -19,6 +19,7 @@
 		<module>springsecurityajax</module>
 		<module>oauth2</module>
 		<module>springmvc</module>
+        <module>quartz</module>
 	</modules>
 
 	<dependencyManagement>
