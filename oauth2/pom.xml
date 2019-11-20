@@ -10,5 +10,6 @@
   <modules>
   	<module>oauth2server</module>
   	<module>oauth2client</module>
+  	<module>shiroclient</module>
   </modules>
 </project>
