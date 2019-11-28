@@ -7,11 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class Org {
 	private Integer id;
 	private String name;
 	private String systemId;
 	private String tenantId;
-	
-	
 }

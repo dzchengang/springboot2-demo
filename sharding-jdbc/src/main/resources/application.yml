@@ -9,24 +9,42 @@ mybatis:
 spring:
    shardingsphere:
       datasource:
-         names: dbt1,dbt2
-         dbt1:
+         names: dbt1s1,dbt1s2,dbt2s1,dbt2s2
+         dbt1s1:
            type: com.zaxxer.hikari.HikariDataSource
            driverClassName: com.mysql.cj.jdbc.Driver
-           jdbcUrl: jdbc:mysql://192.168.2.183:3306/dbt1?characterEncoding=utf8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
+           jdbcUrl: jdbc:mysql://192.168.2.183:3306/dbt1s1?characterEncoding=utf8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
            username: root
            password: qwe123-=        
-         dbt2:
+         dbt1s2:
            type: com.zaxxer.hikari.HikariDataSource
            driverClassName: com.mysql.cj.jdbc.Driver
-           jdbcUrl: jdbc:mysql://192.168.2.183:3306/dbt2?characterEncoding=utf8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
+           jdbcUrl: jdbc:mysql://192.168.2.183:3306/dbt1s2?characterEncoding=utf8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
+           username: root
+           password: qwe123-=
+         dbt2s1:
+           type: com.zaxxer.hikari.HikariDataSource
+           driverClassName: com.mysql.cj.jdbc.Driver
+           jdbcUrl: jdbc:mysql://192.168.2.183:3306/dbt2s1?characterEncoding=utf8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
+           username: root
+           password: qwe123-=        
+         dbt2s2:
+           type: com.zaxxer.hikari.HikariDataSource
+           driverClassName: com.mysql.cj.jdbc.Driver
+           jdbcUrl: jdbc:mysql://192.168.2.183:3306/dbt2s2?characterEncoding=utf8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
            username: root
            password: qwe123-=
       sharding:
          tables:
             user:
-               actualDataNodes: dbt1.user,dbt2.user
+               actualDataNodes: dbt1s1.user,dbt2s1.user
                databaseStrategy:
                   inline:
-                     shardingColumn: tenant_id
-                     algorithmExpression: dbt${tenant_id}
+                     shardingColumn: tenant_id,system_id
+                     algorithmExpression: dbt${tenant_id}s${system_id}
+            org:
+               actualDataNodes: dbt1s2.org,dbt2s2.org
+               databaseStrategy:
+                  inline:
+                     shardingColumn: tenant_id,system_id
+                     algorithmExpression: dbt${tenant_id}s${system_id}

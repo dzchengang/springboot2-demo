@@ -19,7 +19,8 @@ public class UserDaoTest {
 		User dto=new User();
 		dto.setId(1);
 		dto.setName("user2");
-		dto.setTenantId(2);
+		dto.setSystemId("1");
+		dto.setTenantId("2");
 		userDao.insert(dto);
 	}
 
