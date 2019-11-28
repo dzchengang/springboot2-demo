@@ -19,6 +19,7 @@
 		<module>oauth2</module>
 		<module>springmvc</module>
         <module>quartz</module>
+        <module>sharding-jdbc</module>
 	</modules>
 
 	<dependencyManagement>

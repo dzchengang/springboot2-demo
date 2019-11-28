@@ -1,0 +1,32 @@
+server:
+ port: 8089
+
+mybatis:
+  mapper-locations: classpath:mybatis/*.xml,classpath:mybatis/*/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+     
+spring:
+   shardingsphere:
+      datasource:
+         names: ds0,ds1
+         db_t1:
+           type: org.apache.commons.dbcp2.BasicDataSource
+           driverClassName: com.mysql.jdbc.Driver
+           url: jdbc:mysql://localhost:3306/db_t1
+           username: root
+           password: qwe123-=        
+         db_t2:
+           type: org.apache.commons.dbcp2.BasicDataSource
+           driverClassName: com.mysql.jdbc.Driver
+           url: jdbc:mysql://localhost:3306/db_t2
+           username: root
+           password: qwe123-=
+      sharding:
+         tables:
+            user:
+               actualDataNodes: db_t1.user,db_t2.user
+               tableStrategy:
+                  inline:
+                     shardingColumn: tenant_id
+                     algorithmExpression: db_t${tenant_id}.user
