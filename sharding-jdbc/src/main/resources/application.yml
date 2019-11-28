@@ -9,24 +9,24 @@ mybatis:
 spring:
    shardingsphere:
       datasource:
-         names: ds0,ds1
-         db_t1:
-           type: org.apache.commons.dbcp2.BasicDataSource
-           driverClassName: com.mysql.jdbc.Driver
-           url: jdbc:mysql://localhost:3306/db_t1
+         names: dbt1,dbt2
+         dbt1:
+           type: com.zaxxer.hikari.HikariDataSource
+           driverClassName: com.mysql.cj.jdbc.Driver
+           jdbcUrl: jdbc:mysql://192.168.2.183:3306/dbt1?characterEncoding=utf8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
            username: root
            password: qwe123-=        
-         db_t2:
-           type: org.apache.commons.dbcp2.BasicDataSource
-           driverClassName: com.mysql.jdbc.Driver
-           url: jdbc:mysql://localhost:3306/db_t2
+         dbt2:
+           type: com.zaxxer.hikari.HikariDataSource
+           driverClassName: com.mysql.cj.jdbc.Driver
+           jdbcUrl: jdbc:mysql://192.168.2.183:3306/dbt2?characterEncoding=utf8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
            username: root
            password: qwe123-=
       sharding:
          tables:
             user:
-               actualDataNodes: db_t1.user,db_t2.user
-               tableStrategy:
+               actualDataNodes: dbt1.user,dbt2.user
+               databaseStrategy:
                   inline:
                      shardingColumn: tenant_id
-                     algorithmExpression: db_t${tenant_id}.user
+                     algorithmExpression: dbt${tenant_id}

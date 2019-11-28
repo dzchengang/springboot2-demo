@@ -1,4 +1,4 @@
-oauth2-server: http://localhost:8080
+oauth2-server: http://192.168.2.183:8888/oauth2server
 
 server:
   port: 8081
@@ -8,11 +8,11 @@ security:
     client:
       client-id: client1
       client-secret: 111111
-      access-token-uri: http://localhost:8080/oauth/token
-      user-authorization-uri: http://localhost:8080/oauth/authorize
+      access-token-uri: ${oauth2-server}/oauth/token
+      user-authorization-uri: ${oauth2-server}/oauth/authorize
     resource:
       jwt:
-        key-uri: http://localhost:8080/oauth/token_key        
+        key-uri: ${oauth2-server}/oauth/token_key        
         
         
         

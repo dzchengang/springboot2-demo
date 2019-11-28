@@ -1,12 +1,16 @@
 package com.sdstc.sys.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 	private Integer id;
 	private String name;
 	private Integer tenantId;
+	
+	
 }
