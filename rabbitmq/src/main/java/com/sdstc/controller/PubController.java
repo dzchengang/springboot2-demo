@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sdstc.dto.User;
-import com.sdstc.rabbitmq.fanout.FanoutSender;
+import com.sdstc.rabbitmq.topic.TopicSender;
 
 @RestController
 @RequestMapping("/")
 public class PubController {
 	@Autowired
-	private FanoutSender fanoutSender;
-
+	TopicSender topicSender;
+	
 	@GetMapping("/sendReq")
 	public Map<String, String> sendReq() {
 		Map<String, String> result = new HashMap<String, String>();
@@ -24,8 +24,8 @@ public class PubController {
 		User user = new User();
 		user.setId("1");
 		user.setName("陈刚");
-		fanoutSender.send(user);
 		
+		topicSender.send(user);
 		
 		return result;
 	}

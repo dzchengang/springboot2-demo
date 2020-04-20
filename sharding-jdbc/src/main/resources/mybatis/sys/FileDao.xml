@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdstc.sys.dao.FileDao">
+	<resultMap type="com.sdstc.sys.model.File" id="fileMap">
+	 <id column="id"  property="id"/>
+	 <result column="tenant_id" property="tenantId"/>
+	 <result column="name" property="name"/>
+	</resultMap>
+	
+	<insert id="insertFile" parameterType="com.sdstc.sys.model.File">
+		insert into file
+		(id,name,tenant_id)
+		values
+		(#{id},#{name},#{tenantId})
+	</insert>
+	
+	<insert id="insertFileRelation" parameterType="com.sdstc.sys.model.FileRelation">
+		insert into file_relation
+		(id,name,file_id,tenant_id)
+		values
+		(#{id},#{name},#{fileId},#{tenantId})
+	</insert>
+	
+	<select id="selFile" resultMap="fileMap">
+	    SELECT
+			t.id,t.name,t.tenant_id
+		FROM
+			file t 
+		WHERE
+		    t.tenant_id=#{tenantId}
+		    and
+			t.id IN (
+				SELECT 
+					t1.id
+				FROM
+					file_relation t1 
+				WHERE
+					t1.tenant_id=#{tenantId}
+					and
+					t1.NAME = #{name}
+			)
+		<!-- 
+		SELECT DISTINCT
+			( t2.id ),
+			t2.NAME,
+			t2.tenant_id 
+		FROM
+			file_relation t1
+			LEFT JOIN file t2 ON t1.file_id = t2.id 
+		WHERE
+			t1.tenant_id = #{tenantId}
+			AND t2.tenant_id = #{tenantId}
+			AND t1.NAME = #{name} 
+		 -->
+	</select>
+</mapper>

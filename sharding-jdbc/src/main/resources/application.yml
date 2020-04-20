@@ -9,42 +9,40 @@ mybatis:
 spring:
    shardingsphere:
       datasource:
-         names: dbt1s1,dbt1s2,dbt2s1,dbt2s2
-         dbt1s1:
+         names: db1,db2
+         db1:
            type: com.zaxxer.hikari.HikariDataSource
            driverClassName: com.mysql.cj.jdbc.Driver
-           jdbcUrl: jdbc:mysql://192.168.2.183:3306/dbt1s1?characterEncoding=utf8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
+           jdbcUrl: jdbc:mysql://172.16.200.12:3306/db1?characterEncoding=utf8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
            username: root
            password: qwe123-=        
-         dbt1s2:
+         db2:
            type: com.zaxxer.hikari.HikariDataSource
            driverClassName: com.mysql.cj.jdbc.Driver
-           jdbcUrl: jdbc:mysql://192.168.2.183:3306/dbt1s2?characterEncoding=utf8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
+           jdbcUrl: jdbc:mysql://172.16.200.12:3306/db2?characterEncoding=utf8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
            username: root
            password: qwe123-=
-         dbt2s1:
-           type: com.zaxxer.hikari.HikariDataSource
-           driverClassName: com.mysql.cj.jdbc.Driver
-           jdbcUrl: jdbc:mysql://192.168.2.183:3306/dbt2s1?characterEncoding=utf8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
-           username: root
-           password: qwe123-=        
-         dbt2s2:
-           type: com.zaxxer.hikari.HikariDataSource
-           driverClassName: com.mysql.cj.jdbc.Driver
-           jdbcUrl: jdbc:mysql://192.168.2.183:3306/dbt2s2?characterEncoding=utf8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
-           username: root
-           password: qwe123-=
+      props:
+        sql.show: true
       sharding:
          tables:
-            user:
-               actualDataNodes: dbt1s1.user,dbt2s1.user
+            file:
+               actualDataNodes: db${1..2}.file${1..3}
                databaseStrategy:
                   inline:
-                     shardingColumn: tenant_id,system_id
-                     algorithmExpression: dbt${tenant_id}s${system_id}
-            org:
-               actualDataNodes: dbt1s2.org,dbt2s2.org
+                     shardingColumn: tenant_id
+                     algorithmExpression: db${tenant_id%2+1}
+               tableStrategy:
+                  inline:
+                     shardingColumn: tenant_id
+                     algorithmExpression: file${tenant_id%3+1}
+            file_relation:
+               actualDataNodes: db${1..2}.file_relation${1..3}
                databaseStrategy:
                   inline:
-                     shardingColumn: tenant_id,system_id
-                     algorithmExpression: dbt${tenant_id}s${system_id}
+                     shardingColumn: tenant_id
+                     algorithmExpression: db${tenant_id%2+1}
+               tableStrategy:
+                  inline:
+                     shardingColumn: tenant_id
+                     algorithmExpression: file_relation${tenant_id%3+1}
