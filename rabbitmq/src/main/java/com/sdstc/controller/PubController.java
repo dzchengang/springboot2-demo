@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sdstc.dto.User;
+import com.sdstc.project.dto.ProjectProInfoDto;
 import com.sdstc.rabbitmq.topic.TopicSender;
 
 @RestController
@@ -21,9 +21,8 @@ public class PubController {
 	public Map<String, String> sendReq() {
 		Map<String, String> result = new HashMap<String, String>();
 		
-		User user = new User();
-		user.setId("1");
-		user.setName("陈刚");
+		ProjectProInfoDto user = new ProjectProInfoDto();
+		user.setCustomerId(1L);
 		
 		topicSender.send(user);
 		

@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitConfig {
 	// topic
-	public static final String TOPIC_QUEUE1 = "topic.queue.add.lre.project";
-	public static final String TOPIC_QUEUE2 = "project.lre.del";
+	public static final String TOPIC_QUEUE1 = "topic.queue.addProject.lre";
+	public static final String TOPIC_QUEUE2 = "topic.queue.editProject.lre";
 	public static final String TOPIC_EXCHANGE = "project.topic";
 
 	
@@ -32,12 +32,12 @@ public class RabbitConfig {
     
     @Bean
     public Binding topicBinding1() {
-        return BindingBuilder.bind(topicQueue1()).to(topicExchange()).with("topic.queue.add.lre.project");
+        return BindingBuilder.bind(topicQueue1()).to(topicExchange()).with(TOPIC_QUEUE1);
     }
  
     @Bean
     public Binding topicBinding2() {
-        return BindingBuilder.bind(topicQueue2()).to(topicExchange()).with("project.lre.del");
+        return BindingBuilder.bind(topicQueue2()).to(topicExchange()).with(TOPIC_QUEUE2);
     }
  
  

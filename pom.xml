@@ -20,6 +20,8 @@
 		<module>springmvc</module>
         <module>quartz</module>
         <module>sharding-jdbc</module>
+        <module>k8s</module>
+        <module>redis</module>
 	</modules>
 
 	<dependencyManagement>

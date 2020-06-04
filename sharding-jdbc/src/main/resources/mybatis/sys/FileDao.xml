@@ -27,18 +27,36 @@
 		FROM
 			file t 
 		WHERE
-		    t.tenant_id=#{tenantId}
-		    and
+		   t.tenant_id=#{tenantId}
+		    and 
 			t.id IN (
 				SELECT 
 					t1.id
 				FROM
 					file_relation t1 
 				WHERE
-					t1.tenant_id=#{tenantId}
+					t1.tenant_id=#{tenantId} 
 					and
 					t1.NAME = #{name}
 			)
+			
+	    <!-- SELECT
+			t.id,t.name,t.tenant_id
+		FROM
+			file t 
+		WHERE
+		   t.tenant_id=#{tenantId}
+		    and 
+			t.id IN (
+				SELECT 
+					t1.id
+				FROM
+					file_relation t1 
+				WHERE
+					t1.tenant_id=#{tenantId} 
+					and
+					t1.NAME = #{name}
+			) -->
 		<!-- 
 		SELECT DISTINCT
 			( t2.id ),
@@ -52,5 +70,57 @@
 			AND t2.tenant_id = #{tenantId}
 			AND t1.NAME = #{name} 
 		 -->
+	</select>
+	
+	<insert id="insertFiles" parameterType="com.sdstc.sys.model.File">
+		insert into file
+		(id,name,tenant_id)
+		values
+		<foreach  collection="files" item="item" index="index" separator=",">
+		(#{item.id},#{item.name},#{item.tenantId})
+		</foreach>
+		
+	</insert>
+	
+	<resultMap type="com.sdstc.sys.model.Product" id="productMap">
+	 <id column="id"  property="id"/>
+	 <result column="name" property="name"/>
+	 <result column="code" property="code"/>
+	</resultMap>
+	
+	<select id="getProduct" resultMap="productMap">
+	 SELECT
+	tt1.* 
+FROM
+	(
+	SELECT
+		prod_model_attr.*,
+		prod_version.is_current_version,
+		prod_version.version,
+		prod_version.tag_time,
+		prod_version.check_remark,
+		prod_version.check_state 
+	FROM
+		(
+		SELECT
+			max( t.ref_id ) AS ref_id,
+			t.is_current_version,
+			t.version,
+			t.tag_time,
+			t.check_remark,
+			t.check_state 
+		FROM
+			prod_version t 
+		WHERE
+			t.is_delete = '0' 
+			AND t.ref_type = '1' 
+		GROUP BY
+			t.ref_root_id 
+		) prod_version
+		LEFT JOIN prod_model_attr prod_model_attr ON prod_version.ref_id = prod_model_attr.id 
+	) tt1 
+WHERE
+	tt1.is_delete = '0' 
+	AND tt1.model_root_id ='100'
 	</select>
 </mapper>

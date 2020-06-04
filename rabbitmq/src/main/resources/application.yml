@@ -3,7 +3,7 @@ server:
 
 spring:
     rabbitmq:
-        host: 172.16.200.53
+        host: 172.16.10.202
         port: 5672
         username: admin
         password: qwe123-=

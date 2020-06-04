@@ -24,7 +24,7 @@ public class TopicReceiver {
 	}
 
 	@RabbitListener(queues = RabbitConfig.TOPIC_QUEUE2)
-	public void receiveTopic2(Message message, User user, Channel channel) throws IOException {
+	public void receiveTopic2(Message message, ProjectProInfoDto user, Channel channel) throws IOException {
 		System.out.println("【receiveTopic2监听到消息】" + user.toString());
 
 		// 手工确认

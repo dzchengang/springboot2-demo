@@ -7,42 +7,15 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
      
 spring:
-   shardingsphere:
-      datasource:
-         names: db1,db2
-         db1:
+    shardingsphere:
+       datasource:
+         names: product
+         product:
            type: com.zaxxer.hikari.HikariDataSource
            driverClassName: com.mysql.cj.jdbc.Driver
-           jdbcUrl: jdbc:mysql://172.16.200.12:3306/db1?characterEncoding=utf8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
+           jdbcUrl: jdbc:mysql://172.16.200.49:3306/product?characterEncoding=utf8&allowMultiQueries=true&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Shanghai
            username: root
-           password: qwe123-=        
-         db2:
-           type: com.zaxxer.hikari.HikariDataSource
-           driverClassName: com.mysql.cj.jdbc.Driver
-           jdbcUrl: jdbc:mysql://172.16.200.12:3306/db2?characterEncoding=utf8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
-           username: root
-           password: qwe123-=
-      props:
-        sql.show: true
-      sharding:
-         tables:
-            file:
-               actualDataNodes: db${1..2}.file${1..3}
-               databaseStrategy:
-                  inline:
-                     shardingColumn: tenant_id
-                     algorithmExpression: db${tenant_id%2+1}
-               tableStrategy:
-                  inline:
-                     shardingColumn: tenant_id
-                     algorithmExpression: file${tenant_id%3+1}
-            file_relation:
-               actualDataNodes: db${1..2}.file_relation${1..3}
-               databaseStrategy:
-                  inline:
-                     shardingColumn: tenant_id
-                     algorithmExpression: db${tenant_id%2+1}
-               tableStrategy:
-                  inline:
-                     shardingColumn: tenant_id
-                     algorithmExpression: file_relation${tenant_id%3+1}
+           password: qwe123-=   
+       sharding:
+         defaultDataSourceName: product
+         

@@ -1,5 +1,7 @@
 package com.sdstc.sys.model;
 
+import org.apache.shardingsphere.shardingjdbc.jdbc.core.statement.ShardingPreparedStatement;
+
 import lombok.Data;
 
 @Data
