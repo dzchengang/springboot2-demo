@@ -23,6 +23,7 @@ public class RedisLock {
 		Integer stock=this.getValue("stock",Integer.class);
 		if(stock==null) {
 			this.setValue("stock", 1000,Integer.class);
+			stock=1000;
 		}else {
             System.out.println(stock);
             stock=stock-1;
@@ -41,5 +42,10 @@ public class RedisLock {
 	public  <T> void setValue(String key,Object value,Class<T> valueClazz) {
 		RBucket<T> keyVal=redissonClient.getBucket(key);
 		keyVal.set((T)value);
+	}
+	
+	public void delKey(String key) {
+		RBucket keyVal = redissonClient.getBucket(key);
+		keyVal.delete();
 	}
 }
