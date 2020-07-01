@@ -24,6 +24,8 @@
         <module>redis</module>
         <module>alipay</module>
         <module>Redisson</module>
+        <module>strategy</module>
+        <module>ylpay</module>
 	</modules>
 
 	<dependencyManagement>
