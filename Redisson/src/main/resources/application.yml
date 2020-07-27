@@ -2,6 +2,7 @@ server:
  port: 8089
 spring:
   redis:
-   password: qwe123-=
-   cluster:
-     nodes:  172.16.10.88:7000
+    host: 172.16.200.55
+    port: 7000
+    password: qwe123-=
+   

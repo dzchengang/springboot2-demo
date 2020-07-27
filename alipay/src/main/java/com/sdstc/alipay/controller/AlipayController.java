@@ -32,6 +32,10 @@ public class AlipayController {
 	private static final String ALIPAY_PUBLIC_KEY="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoNPrjbWuJUT+OeOar9YDeY2TUstLvvgcjhiqZ7VsPduKoBfSrIUPqPkTz7CdJlIpHlxlHQfm6JQ1Ljcb+t84TWxsm6/V6BHZsnrps72as7BgH9h8b5IfjwUtHrvgu3LZuxleWP/u34HMlpGhBFOgPBcYDfZQg/Fmg04PAo3J8N6P9caAU++DUFgJAfWa0PSKJUn8P8nPIyGHxFPPUTPZMpXEGqIeAm+XunlLEf/+nj3vVgYfUKJL3L1UK58St7tkPlWL3mXmCtV2t4Av5eBGilbYSCD3vlZznkYY/nxygEudvfJIkZCF8sMLWHR8uKKgt1ginwYatonPVdte/4J7IwIDAQAB";
 	private static final String SIGN_TYPE="RSA2";
 	
+	public static void main(String[] args) {
+		System.out.println(APP_PRIVATE_KEY.length());
+	}
+	
 	@GetMapping("/pay") 
 	public void pay(HttpServletRequest httpRequest,HttpServletResponse httpResponse) throws IOException, AlipayApiException {
 		//获得初始化的AlipayClient 
@@ -45,7 +49,7 @@ public class AlipayController {
 	    alipayRequest.setNotifyUrl( "http://58.56.56.251:8089/notify" ); 
 	    
 	    //填充业务参数 
-	    AliPayContentDto contentDto=new AliPayContentDto("20150320010101005", "FAST_INSTANT_TRADE_PAY","0.01", "test");
+	    AliPayContentDto contentDto=new AliPayContentDto("20150320010101010", "FAST_INSTANT_TRADE_PAY","0.01", "test");
 	    ObjectMapper om = new ObjectMapper();
 	    om.setSerializationInclusion(Include.NON_NULL);
 	    alipayRequest.setBizContent(om.writeValueAsString(contentDto));
@@ -103,5 +107,6 @@ public class AlipayController {
 		
 		return params;
 	}
+	
 	
 }

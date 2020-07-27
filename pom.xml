@@ -26,6 +26,9 @@
         <module>Redisson</module>
         <module>strategy</module>
         <module>ylpay</module>
+        <module>activiti7</module>
+        <module>mybatis-dbsource</module>
+        
 	</modules>
 
 	<dependencyManagement>

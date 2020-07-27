@@ -13,7 +13,7 @@ public class RabbitConfig {
 	public static final String TOPIC_QUEUE1 = "topic.queue.addProject.lre";
 	public static final String TOPIC_QUEUE2 = "topic.queue.editProject.lre";
 	public static final String TOPIC_EXCHANGE = "project.topic";
-
+	public static final String TOPIC_QUEUE3 = "order.topic.addhostchengang.lre";
 	
     @Bean
     public Queue topicQueue1() {

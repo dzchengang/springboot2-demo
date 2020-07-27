@@ -1,20 +1,22 @@
 package com.sdstc.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.sdstc.service.TestService;
 
 @RestController
 @RequestMapping("/")
 public class PubController {
+	@Autowired
+	private TestService testService;
 
-	@GetMapping("/sendReq")
-	public Map<String, String> sendReq() {
-		Map<String, String> result = new HashMap<String, String>();
-		result.put("x", "y");
-		return result;
+	@PostMapping("/test")
+	public String test(String code) {
+		DataSourceContextHolder.setDbType(code);
+		testService.test(code);
+		return "result:" + code;
 	}
 }
