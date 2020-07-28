@@ -1,0 +1,16 @@
+server:
+ port: 8080
+
+spring:
+  application:
+    name: baseservice
+  main:
+    allow-bean-definition-overriding: true
+dbs:  
+  master:
+    initialize: false
+    url: jdbc:mysql://172.16.10.45:31004/tenant?characterEncoding=utf8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true
+    username: root
+    password: qwe123-=
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
