@@ -11,7 +11,7 @@ public class DSConfig {
 	@Bean("dyDS")
 	public DataSource dyDS(DataSource dataSource) {
 		// 动态数据源
-		DyDSRouting dyDSRouting = new DyDSRouting();
+		DyRoutingDS dyDSRouting = new DyRoutingDS();
 		// 指定默认数据源
 		dyDSRouting.setDefaultTargetDataSource(dataSource);
         // 设置 数据源

@@ -3,8 +3,12 @@ server:
 
 spring:
     rabbitmq:
-        host: 172.16.200.49
-        port: 5672
+        host: 172.16.10.45
+        port: 31006
         username: admin
         password: qwe123-=
-        virtual-host: /
+        listener:
+          direct:
+            acknowledge-mode: manual
+          simple:
+            acknowledge-mode: manual

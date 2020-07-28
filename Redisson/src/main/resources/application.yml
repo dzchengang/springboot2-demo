@@ -2,7 +2,7 @@ server:
  port: 8089
 spring:
   redis:
-    host: 172.16.200.55
-    port: 7000
+    host: 172.16.200.49
+    port: 6379
     password: qwe123-=
    
