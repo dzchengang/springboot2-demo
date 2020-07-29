@@ -28,7 +28,8 @@
         <module>ylpay</module>
         <module>activiti7</module>
         <module>mybatis-dbsource</module>
-        
+        <module>echarts</module>
+        <module>wordchart</module>
 	</modules>
 
 	<dependencyManagement>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+	<Relationship Id="rId3" Target="../embeddings/Microsoft_Excel_Worksheet.xlsx" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/package"/>
+	<Relationship Id="rId2" Target="colors1.xml" Type="http://schemas.microsoft.com/office/2011/relationships/chartColorStyle"/>
+	<Relationship Id="rId1" Target="style1.xml" Type="http://schemas.microsoft.com/office/2011/relationships/chartStyle"/>
+</Relationships>
