@@ -19,5 +19,14 @@ public class RowDto {
 	/**
 	 * 数据
 	 */
-	private List<Object> datas;
+	private List<String> datas;
+
+	public RowDto(String rowName, List<String> datas) {
+		this.rowName = rowName;
+		this.datas = datas;
+	}
+	
+	public RowDto(List<String> datas) {
+		this.datas = datas;
+	}
 }

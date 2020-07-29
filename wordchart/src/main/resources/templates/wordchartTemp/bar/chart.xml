@@ -49,16 +49,18 @@
 				<c:barDir val="col"/>
 				<c:grouping val="clustered"/>
 				<c:varyColors val="0"/>
+				
+				<#list cols as col>
 				<c:ser>
-					<c:idx val="0"/>
-					<c:order val="0"/>
+					<c:idx val="${col_index}"/>
+					<c:order val="${col_index}"/>
 					<c:tx>
 						<c:strRef>
-							<c:f>Sheet1!$B$1</c:f>
+							<c:f>${(col.colSheetIndex)!}</c:f>
 							<c:strCache>
 								<c:ptCount val="1"/>
 								<c:pt idx="0">
-									<c:v>系列 1</c:v>
+									<c:v>${(col.name)!}</c:v>
 								</c:pt>
 							</c:strCache>
 						</c:strRef>
@@ -75,42 +77,28 @@
 					<c:invertIfNegative val="0"/>
 					<c:cat>
 						<c:strRef>
-							<c:f>Sheet1!$A$2:$A$5</c:f>
+							<c:f>${(col.rowNameSheetIndex)!}</c:f>
 							<c:strCache>
-								<c:ptCount val="4"/>
-								<c:pt idx="0">
-									<c:v>类别 1</c:v>
+								<c:ptCount val="${rowSize!}"/>
+								<#list rowNames as rowName>
+								<c:pt idx="${rowName_index}">
+									<c:v>${rowName!}</c:v>
 								</c:pt>
-								<c:pt idx="1">
-									<c:v>类别 2</c:v>
-								</c:pt>
-								<c:pt idx="2">
-									<c:v>类别 3</c:v>
-								</c:pt>
-								<c:pt idx="3">
-									<c:v>类别 4</c:v>
-								</c:pt>
+								</#list>
 							</c:strCache>
 						</c:strRef>
 					</c:cat>
 					<c:val>
 						<c:numRef>
-							<c:f>Sheet1!$B$2:$B$5</c:f>
+							<c:f>${(col.rowDataSheetIndex)!}</c:f>
 							<c:numCache>
 								<c:formatCode>General</c:formatCode>
-								<c:ptCount val="4"/>
-								<c:pt idx="0">
-									<c:v>4.3</c:v>
+								<c:ptCount val="${rowSize!}"/>
+								<#list col.rowDatas as rowData>
+								<c:pt idx="${rowData_index}">
+									<c:v>${rowData}</c:v>
 								</c:pt>
-								<c:pt idx="1">
-									<c:v>2.5</c:v>
-								</c:pt>
-								<c:pt idx="2">
-									<c:v>3.5</c:v>
-								</c:pt>
-								<c:pt idx="3">
-									<c:v>4.5</c:v>
-								</c:pt>
+								</#list>
 							</c:numCache>
 						</c:numRef>
 					</c:val>
@@ -120,148 +108,7 @@
 						</c:ext>
 					</c:extLst>
 				</c:ser>
-				<c:ser>
-					<c:idx val="1"/>
-					<c:order val="1"/>
-					<c:tx>
-						<c:strRef>
-							<c:f>Sheet1!$C$1</c:f>
-							<c:strCache>
-								<c:ptCount val="1"/>
-								<c:pt idx="0">
-									<c:v>系列 2</c:v>
-								</c:pt>
-							</c:strCache>
-						</c:strRef>
-					</c:tx>
-					<c:spPr>
-						<a:solidFill>
-							<a:schemeClr val="accent2"/>
-						</a:solidFill>
-						<a:ln>
-							<a:noFill/>
-						</a:ln>
-						<a:effectLst/>
-					</c:spPr>
-					<c:invertIfNegative val="0"/>
-					<c:cat>
-						<c:strRef>
-							<c:f>Sheet1!$A$2:$A$5</c:f>
-							<c:strCache>
-								<c:ptCount val="4"/>
-								<c:pt idx="0">
-									<c:v>类别 1</c:v>
-								</c:pt>
-								<c:pt idx="1">
-									<c:v>类别 2</c:v>
-								</c:pt>
-								<c:pt idx="2">
-									<c:v>类别 3</c:v>
-								</c:pt>
-								<c:pt idx="3">
-									<c:v>类别 4</c:v>
-								</c:pt>
-							</c:strCache>
-						</c:strRef>
-					</c:cat>
-					<c:val>
-						<c:numRef>
-							<c:f>Sheet1!$C$2:$C$5</c:f>
-							<c:numCache>
-								<c:formatCode>General</c:formatCode>
-								<c:ptCount val="4"/>
-								<c:pt idx="0">
-									<c:v>2.4</c:v>
-								</c:pt>
-								<c:pt idx="1">
-									<c:v>4.4000000000000004</c:v>
-								</c:pt>
-								<c:pt idx="2">
-									<c:v>1.8</c:v>
-								</c:pt>
-								<c:pt idx="3">
-									<c:v>2.8</c:v>
-								</c:pt>
-							</c:numCache>
-						</c:numRef>
-					</c:val>
-					<c:extLst>
-						<c:ext uri="{C3380CC4-5D6E-409C-BE32-E72D297353CC}" xmlns:c16="http://schemas.microsoft.com/office/drawing/2014/chart">
-							<c16:uniqueId val="{00000001-0AB0-4BB0-8725-5FF99506DC6F}"/>
-						</c:ext>
-					</c:extLst>
-				</c:ser>
-				<c:ser>
-					<c:idx val="2"/>
-					<c:order val="2"/>
-					<c:tx>
-						<c:strRef>
-							<c:f>Sheet1!$D$1</c:f>
-							<c:strCache>
-								<c:ptCount val="1"/>
-								<c:pt idx="0">
-									<c:v>系列 3</c:v>
-								</c:pt>
-							</c:strCache>
-						</c:strRef>
-					</c:tx>
-					<c:spPr>
-						<a:solidFill>
-							<a:schemeClr val="accent3"/>
-						</a:solidFill>
-						<a:ln>
-							<a:noFill/>
-						</a:ln>
-						<a:effectLst/>
-					</c:spPr>
-					<c:invertIfNegative val="0"/>
-					<c:cat>
-						<c:strRef>
-							<c:f>Sheet1!$A$2:$A$5</c:f>
-							<c:strCache>
-								<c:ptCount val="4"/>
-								<c:pt idx="0">
-									<c:v>类别 1</c:v>
-								</c:pt>
-								<c:pt idx="1">
-									<c:v>类别 2</c:v>
-								</c:pt>
-								<c:pt idx="2">
-									<c:v>类别 3</c:v>
-								</c:pt>
-								<c:pt idx="3">
-									<c:v>类别 4</c:v>
-								</c:pt>
-							</c:strCache>
-						</c:strRef>
-					</c:cat>
-					<c:val>
-						<c:numRef>
-							<c:f>Sheet1!$D$2:$D$5</c:f>
-							<c:numCache>
-								<c:formatCode>General</c:formatCode>
-								<c:ptCount val="4"/>
-								<c:pt idx="0">
-									<c:v>2</c:v>
-								</c:pt>
-								<c:pt idx="1">
-									<c:v>2</c:v>
-								</c:pt>
-								<c:pt idx="2">
-									<c:v>3</c:v>
-								</c:pt>
-								<c:pt idx="3">
-									<c:v>5</c:v>
-								</c:pt>
-							</c:numCache>
-						</c:numRef>
-					</c:val>
-					<c:extLst>
-						<c:ext uri="{C3380CC4-5D6E-409C-BE32-E72D297353CC}" xmlns:c16="http://schemas.microsoft.com/office/drawing/2014/chart">
-							<c16:uniqueId val="{00000002-0AB0-4BB0-8725-5FF99506DC6F}"/>
-						</c:ext>
-					</c:extLst>
-				</c:ser>
+				</#list>
 				<c:dLbls>
 					<c:showLegendKey val="0"/>
 					<c:showVal val="0"/>
