@@ -21,56 +21,66 @@ public class WordReportTest {
 
 	@Test
 	public void genChart() {
-		//reportUtil.genChart();
 
 	}
 
 	@Test
 	public void genColors() {
-		//reportUtil.genColors();
 	}
 
 	@Test
 	public void genStyle() {
-		//reportUtil.genStyle();
 	}
 	
 	@Test
 	public void genExcel() {
 		List<String> colNames=new ArrayList<>();
-		colNames.add("cpu");
-		colNames.add("内存");
-		colNames.add("磁盘");
+		colNames.add("系列1");
+		colNames.add("系列2");
+		colNames.add("系列3");
 		
 		List<String> rowNames=new ArrayList<>();
-		rowNames.add("3:23");
-		rowNames.add("3:24");
-		rowNames.add("3:25");
-		rowNames.add("3:26");
-		rowNames.add("3:27");
-		rowNames.add("3:28");
+		rowNames.add("类别1");
+		rowNames.add("类别2");
+		rowNames.add("类别3");
+		rowNames.add("类别4");
 		
-		List<List<String>> rowDatas=new ArrayList<>();
+		List<List<Number>> rowDatas=new ArrayList<>();
 		
-		List<String> data1= Arrays.asList("100","80","70");
-		List<String> data2= Arrays.asList("90","80","100");
-		List<String> data3= Arrays.asList("100","100","100");
-		List<String> data4= Arrays.asList("60","80","70");
-		List<String> data5= Arrays.asList("100","20","0");
-		List<String> data6= Arrays.asList("0","80","70");
+		List<Number> data1= Arrays.asList(100,8,70);
+		List<Number> data2= Arrays.asList(90,80.5,100);
+		List<Number> data3= Arrays.asList(100,100.78,100);
+		List<Number> data4= Arrays.asList(6.90,80,70);
 		
 		rowDatas.add(data1);
 		rowDatas.add(data2);
 		rowDatas.add(data3);
 		rowDatas.add(data4);
-		rowDatas.add(data5);
-		rowDatas.add(data6);
 		
-		TableDto dto=new TableDto("aa","xxx", colNames, rowNames, rowDatas);
-        
+		String lastIndex="abc";
+		String type="bar";
 		
+		TableDto dto=new TableDto(lastIndex,"xxx", colNames, rowNames, rowDatas);
 		
-		System.out.println(reportUtil.genChart(dto,"bar"));
+		//File excelFile=new File("D:/test/ExcelBar"+lastIndex+".xlsx");
+		//reportUtil.genExcel(dto, excelFile);
+		
+		File chartFile=new File("D:/test/chart"+lastIndex+".xml");
+		reportUtil.genChart(dto,type,chartFile);
+		
+		/*
+		File excelFile=new File("D:/test/ExcelBar"+lastIndex+".xlsx");
+		reportUtil.genExcel(dto, excelFile);
+		File chartRelsFile=new File("D:/test/chart"+lastIndex+".xml.rels");
+		reportUtil.genChartRes(dto,type,chartRelsFile);
+		File colorsFile=new File("D:/test/colorsBar"+lastIndex+".xml");
+		reportUtil.genColors(dto, type, colorsFile);
+		File styleFile=new File("D:/test/styleBar"+lastIndex+".xml");
+		reportUtil.genStyle(dto, type, styleFile);
+		
+		System.out.println(reportUtil.genDoc(dto, type));
+		System.out.println(reportUtil.genDocRels(dto, type));
+		 * */
 		
 	}
 	

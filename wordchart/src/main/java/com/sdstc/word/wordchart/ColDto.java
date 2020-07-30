@@ -28,7 +28,7 @@ public class ColDto {
 	/**
 	 * 该列的数据
 	 */
-	private List<String> rowDatas;
+	private List<Number> rowDatas;
 	
 	
 

@@ -67,7 +67,7 @@
 					</c:tx>
 					<c:spPr>
 						<a:solidFill>
-							<a:schemeClr val="accent1"/>
+							<a:schemeClr val="accent${col_index+1}"/>
 						</a:solidFill>
 						<a:ln>
 							<a:noFill/>
@@ -304,7 +304,7 @@
 			<a:endParaRPr lang="zh-CN"/>
 		</a:p>
 	</c:txPr>
-	<c:externalData r:id="rId3">
-		<c:autoUpdate val="0"/>
+	<c:externalData r:id="rIdBarExcel${lastIndex!}">
+		<c:autoUpdate val="1"/>
 	</c:externalData>
 </c:chartSpace>
