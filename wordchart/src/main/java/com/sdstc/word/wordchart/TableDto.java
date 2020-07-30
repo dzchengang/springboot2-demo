@@ -14,6 +14,7 @@ import lombok.Data;
 
 @Data
 public class TableDto {
+	private String reportType;
 	/**
 	 * 生成文件后缀
 	 */
@@ -43,7 +44,7 @@ public class TableDto {
 	 */
 	private List<String> rowNames;
 
-	public TableDto(String lastIndex,String title, List<String> colNames,List<String> rowNames,List<List<Number>> rowDatas) {
+	public TableDto(String lastIndex,String reportType,String title, List<String> colNames,List<String> rowNames,List<List<Number>> rowDatas) {
 		List<ColDto> cols=colNames.stream().map(colName->{
 			return new ColDto(colName);
 		}).collect(Collectors.toList());
@@ -51,6 +52,7 @@ public class TableDto {
 		this.rowNames=rowNames;
 		this.rowDatas=rowDatas;
 		this.lastIndex=lastIndex;
+		this.reportType=reportType;
 		this.title = title;
 		this.cols = cols;
 		handleData();

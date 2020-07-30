@@ -304,7 +304,7 @@
 			<a:endParaRPr lang="zh-CN"/>
 		</a:p>
 	</c:txPr>
-	<c:externalData r:id="rIdBarExcel${lastIndex!}">
+	<c:externalData r:id="rId${reportType!}Excel${lastIndex!}">
 		<c:autoUpdate val="1"/>
 	</c:externalData>
 </c:chartSpace>

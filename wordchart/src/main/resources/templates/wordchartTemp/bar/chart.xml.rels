@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
-	<Relationship Id="rIdBarExcel${lastIndex!}" Target="../embeddings/ExcelBar${lastIndex!}.xlsx" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/package"/>
-	<Relationship Id="rIdBarColor${lastIndex!}" Target="colorsBar${lastIndex!}.xml" Type="http://schemas.microsoft.com/office/2011/relationships/chartColorStyle"/>
-	<Relationship Id="rIdBarStyle${lastIndex!}" Target="styleBar${lastIndex!}.xml" Type="http://schemas.microsoft.com/office/2011/relationships/chartStyle"/>
-</Relationships>

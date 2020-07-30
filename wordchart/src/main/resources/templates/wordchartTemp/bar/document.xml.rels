@@ -1,1 +1,0 @@
-<Relationship Id="rIdBar${lastIndex!}" Target="charts/chartBar${lastIndex!}.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/chart"/>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+	<Relationship Id="rId${reportType!}Excel${lastIndex!}" Target="../embeddings/Excel${reportType!}${lastIndex!}.xlsx" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/package"/>
+	<Relationship Id="rId${reportType!}Color${lastIndex!}" Target="colors${reportType!}${lastIndex!}.xml" Type="http://schemas.microsoft.com/office/2011/relationships/chartColorStyle"/>
+	<Relationship Id="rId${reportType!}Style${lastIndex!}" Target="style${reportType!}${lastIndex!}.xml" Type="http://schemas.microsoft.com/office/2011/relationships/chartStyle"/>
+</Relationships>

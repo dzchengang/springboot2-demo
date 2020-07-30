@@ -5,7 +5,7 @@
 	<wp:cNvGraphicFramePr/>
 	<a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
 		<a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/chart">
-			<c:chart r:id="rIdBar${lastIndex!}" xmlns:c="http://schemas.openxmlformats.org/drawingml/2006/chart" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+			<c:chart r:id="rId${reportType!}${lastIndex!}" xmlns:c="http://schemas.openxmlformats.org/drawingml/2006/chart" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
 		</a:graphicData>
 	</a:graphic>
 </wp:inline>

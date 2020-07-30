@@ -58,29 +58,23 @@ public class WordReportTest {
 		rowDatas.add(data4);
 		
 		String lastIndex="abc";
-		String type="bar";
 		
-		TableDto dto=new TableDto(lastIndex,"xxx", colNames, rowNames, rowDatas);
+		TableDto dto=new TableDto(lastIndex,"bar","xxx", colNames, rowNames, rowDatas);
 		
-		//File excelFile=new File("D:/test/ExcelBar"+lastIndex+".xlsx");
-		//reportUtil.genExcel(dto, excelFile);
-		
-		File chartFile=new File("D:/test/chart"+lastIndex+".xml");
-		reportUtil.genChart(dto,type,chartFile);
-		
-		/*
-		File excelFile=new File("D:/test/ExcelBar"+lastIndex+".xlsx");
+		File chartFile=new File("D:/test/chart"+dto.getReportType()+lastIndex+".xml");
+		reportUtil.genChart(dto,chartFile);
+		File excelFile=new File("D:/test/Excel"+dto.getReportType()+lastIndex+".xlsx");
 		reportUtil.genExcel(dto, excelFile);
-		File chartRelsFile=new File("D:/test/chart"+lastIndex+".xml.rels");
-		reportUtil.genChartRes(dto,type,chartRelsFile);
-		File colorsFile=new File("D:/test/colorsBar"+lastIndex+".xml");
-		reportUtil.genColors(dto, type, colorsFile);
-		File styleFile=new File("D:/test/styleBar"+lastIndex+".xml");
-		reportUtil.genStyle(dto, type, styleFile);
+		File chartRelsFile=new File("D:/test/chart"+dto.getReportType()+lastIndex+".xml.rels");
+		reportUtil.genChartRes(dto,chartRelsFile);
+		File colorsFile=new File("D:/test/colors"+dto.getReportType()+lastIndex+".xml");
+		reportUtil.genColors(dto, colorsFile);
+		File styleFile=new File("D:/test/style"+dto.getReportType()+lastIndex+".xml");
+		reportUtil.genStyle(dto, styleFile);
 		
-		System.out.println(reportUtil.genDoc(dto, type));
-		System.out.println(reportUtil.genDocRels(dto, type));
-		 * */
+		System.out.println(reportUtil.genDoc(dto));
+		System.out.println(reportUtil.genDocRels(dto));
+		System.out.println(reportUtil.genContentType(dto));
 		
 	}
 	

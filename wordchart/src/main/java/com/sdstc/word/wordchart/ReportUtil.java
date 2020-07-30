@@ -29,49 +29,54 @@ public class ReportUtil {
 	private FreeMarker freeMarker;
 
 	// 生成chart
-	public String genChart(TableDto dto, String reportType) {
-		return freeMarker.process("/wordchartTemp/" + reportType + "/chart.xml", dto);
+	public String genChart(TableDto dto) {
+		return freeMarker.process("/wordchartTemp/" + dto.getReportType() + "/chart.xml", dto);
 	}
 
-	public void genChart(TableDto dto, String reportType, File file) {
-		freeMarker.process("/wordchartTemp/" + reportType + "/chart.xml", dto, file);
+	public void genChart(TableDto dto, File file) {
+		freeMarker.process("/wordchartTemp/" + dto.getReportType() + "/chart.xml", dto, file);
 	}
 
 	// 生成colors
-	public String genColors(TableDto dto, String reportType) {
-		return freeMarker.process("/wordchartTemp/" + reportType + "/colors.xml", dto);
+	public String genColors(TableDto dto) {
+		return freeMarker.process("/wordchartTemp/" + dto.getReportType() + "/colors.xml", dto);
 	}
 
-	public void genColors(TableDto dto, String reportType, File file) {
-		freeMarker.process("/wordchartTemp/" + reportType + "/colors.xml", dto, file);
+	public void genColors(TableDto dto, File file) {
+		freeMarker.process("/wordchartTemp/" + dto.getReportType() + "/colors.xml", dto, file);
 	}
 
 	// 生成style
-	public String genStyle(TableDto dto, String reportType) {
-		return freeMarker.process("/wordchartTemp/" + reportType + "/style.xml", dto);
+	public String genStyle(TableDto dto) {
+		return freeMarker.process("/wordchartTemp/" + dto.getReportType() + "/style.xml", dto);
 	}
 
-	public void genStyle(TableDto dto, String reportType, File file) {
-		freeMarker.process("/wordchartTemp/" + reportType + "/style.xml", dto, file);
+	public void genStyle(TableDto dto, File file) {
+		freeMarker.process("/wordchartTemp/" + dto.getReportType() + "/style.xml", dto, file);
 	}
 
 	// 生成chartRes
-	public String genChartRes(TableDto dto, String reportType) {
-		return freeMarker.process("/wordchartTemp/" + reportType + "/chart.xml.rels", dto);
+	public String genChartRes(TableDto dto) {
+		return freeMarker.process("/wordchartTemp/chart.xml.rels", dto);
 	}
 
-	public void genChartRes(TableDto dto, String reportType, File file) {
-		freeMarker.process("/wordchartTemp/" + reportType + "/chart.xml.rels", dto, file);
+	public void genChartRes(TableDto dto, File file) {
+		freeMarker.process("/wordchartTemp/chart.xml.rels", dto, file);
 	}
-	
-	//生成 document 片段
-	public String genDoc(TableDto dto, String reportType) {
-		return freeMarker.process("/wordchartTemp/" + reportType + "/document.xml", dto);
+
+	// 生成 document 片段
+	public String genDoc(TableDto dto) {
+		return freeMarker.process("/wordchartTemp/document.xml", dto);
 	}
-	
-	//生成 document rels片段
-	public String genDocRels(TableDto dto, String reportType) {
-		return freeMarker.process("/wordchartTemp/" + reportType + "/document.xml.rels", dto);
+
+	// 生成 document rels片段
+	public String genDocRels(TableDto dto) {
+		return freeMarker.process("/wordchartTemp/document.xml.rels", dto);
+	}
+
+	// 生成 document rels片段
+	public String genContentType(TableDto dto) {
+		return freeMarker.process("/wordchartTemp/[Content_Types].xml", dto);
 	}
 
 	public void genExcel(TableDto dto, File file) {
@@ -84,7 +89,7 @@ public class ReportUtil {
 				Cell cell = headRow.createCell((i + 1));
 				cell.setCellValue(dto.getCols().get(i).getName());
 			}
-			
+
 			// 创建数据
 			for (int i = 0; i < dto.getRowSize(); i++) {
 				Row dataRow = sheet.createRow((i + 1));
@@ -95,16 +100,16 @@ public class ReportUtil {
 				List<Number> datas = dto.getRowDatas().get(i);
 				for (int j = 0; j < datas.size(); j++) {
 					Cell dataCell = dataRow.createCell((j + 1));
-					Number val=datas.get(j);
-					if(val instanceof Integer) {
-						dataCell.setCellValue((Integer)val);
-					}else if(val instanceof Long) {
-						dataCell.setCellValue((Long)val);
-					}else if(val instanceof Double) {
-						dataCell.setCellValue((Double)val);
-					}else if(val instanceof Float) {
-						dataCell.setCellValue((Float)val);
-					}else {
+					Number val = datas.get(j);
+					if (val instanceof Integer) {
+						dataCell.setCellValue((Integer) val);
+					} else if (val instanceof Long) {
+						dataCell.setCellValue((Long) val);
+					} else if (val instanceof Double) {
+						dataCell.setCellValue((Double) val);
+					} else if (val instanceof Float) {
+						dataCell.setCellValue((Float) val);
+					} else {
 						log.error("un support this type!");
 					}
 				}
