@@ -3,8 +3,8 @@ package com.sdstc.sys.model;
 import lombok.Data;
 
 @Data
-public class Product {
-   private Long id;
+public class User {
+   private Integer id;
    private String name;
-   private String code;
+   private byte[] info;
 }

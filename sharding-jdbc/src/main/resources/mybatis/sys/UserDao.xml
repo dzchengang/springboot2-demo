@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdstc.sys.dao.UserDao">
+	<resultMap type="com.sdstc.sys.model.User" id="UserMap">
+	 <id column="id"  property="id"/>
+	 <result column="name" property="name"/>
+	 <result column="info" property="info"  jdbcType="BLOB" typeHandler="org.apache.ibatis.type.BlobTypeHandler"/>
+	</resultMap>
+	
+	<insert id="insert" parameterType="com.sdstc.sys.model.User">
+		insert into user
+		(id,name,info)
+		values
+		(#{id},#{name},#{info})
+	</insert>
+	
+	<select id="getUser" parameterType="com.sdstc.sys.model.User" resultMap="UserMap">
+	    select * from user
+	    where id=#{id}
+	</select>
+</mapper>

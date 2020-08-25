@@ -1,5 +1,5 @@
 server:
- port: 8089
+  port: 8089
 
 mybatis:
   mapper-locations: classpath:mybatis/*.xml,classpath:mybatis/*/*.xml
@@ -7,15 +7,22 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
      
 spring:
-    shardingsphere:
-       datasource:
-         names: product
-         product:
-           type: com.zaxxer.hikari.HikariDataSource
-           driverClassName: com.mysql.cj.jdbc.Driver
-           jdbcUrl: jdbc:mysql://172.16.200.49:3306/product?characterEncoding=utf8&allowMultiQueries=true&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Shanghai
-           username: root
-           password: qwe123-=   
-       sharding:
-         defaultDataSourceName: product
-         
+  shardingsphere:
+    datasource:
+      names: user-1,user-2
+      user-1:
+        type: com.zaxxer.hikari.HikariDataSource
+        driverClassName: com.mysql.cj.jdbc.Driver
+        jdbcUrl: jdbc:mysql://172.16.10.45:31004/user_1?characterEncoding=utf8&allowMultiQueries=true&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Shanghai
+        username: root
+        password: qwe123-= 
+      user-2:
+        type: com.zaxxer.hikari.HikariDataSource
+        driverClassName: com.mysql.cj.jdbc.Driver
+        jdbcUrl: jdbc:mysql://172.16.10.45:31004/user_2?characterEncoding=utf8&allowMultiQueries=true&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Shanghai
+        username: root
+        password: qwe123-=
+    sharding:
+      defaultDataSourceName: user-1
+      broadcastTables:
+      - user     
