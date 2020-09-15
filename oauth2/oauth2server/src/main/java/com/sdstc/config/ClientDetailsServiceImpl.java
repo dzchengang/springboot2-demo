@@ -44,6 +44,7 @@ public class ClientDetailsServiceImpl implements ClientDetailsService {
 
 		// 用来标识客户端使用的授权类型
 		List<String> authorizedGrantTypes = new ArrayList<String>();
+		authorizedGrantTypes.add("password");
 		authorizedGrantTypes.add("authorization_code");
 		authorizedGrantTypes.add("refresh_token");
 		baseClientDetails.setAuthorizedGrantTypes(authorizedGrantTypes);

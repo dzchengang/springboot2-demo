@@ -3,10 +3,11 @@ server:
 
 spring:
     rabbitmq:
-        host: 172.16.10.45
-        port: 31006
+        host: 172.16.200.49
+        port: 5672
         username: admin
         password: qwe123-=
+        publisherConfirms: true
         listener:
           direct:
             acknowledge-mode: manual
