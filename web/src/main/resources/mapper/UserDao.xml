@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdstc.dao.UserDao">
+	<insert id="insertUser" parameterType="com.sdstc.model.User">
+		 insert into sys_user
+		 (id,name)
+		values
+		 (#{id},#{name})
+	</insert>
+
+	<insert id="insertOrg" parameterType="com.sdstc.model.Org">
+		insert into sys_org
+		(id,name)
+		values
+		(#{id},#{name})
+	</insert>
+</mapper>

@@ -1,0 +1,21 @@
+#端口          
+server:
+  port: 8101
+
+spring:
+  datasource:
+    username: root
+    password: qwe123-=
+    url: jdbc:mysql://172.16.200.49:3306/test?characterEncoding=utf8&allowMultiQueries=true&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#日志
+logging:
+  config: classpath:log4j2.xml
+
+#mybatis
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.sdstc.*.model
+  configuration:
+    #当查询数据为空时字段返回为null，不加这个查询数据为空时，字段将被隐藏
+    call-setters-on-nulls: true
