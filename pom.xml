@@ -30,6 +30,7 @@
         <module>wordchart</module>
 		<module>web</module>
 		<module>aliyun</module>
+		<module>webflux</module>
     </modules>
 
 	<dependencyManagement>
