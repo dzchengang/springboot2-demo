@@ -3,10 +3,14 @@
 <mapper namespace="com.sdstc.dao.UserDao">
 	<insert id="insertUser" parameterType="com.sdstc.model.User">
 		 insert into sys_user
-		 (id,name)
+		 (name)
 		values
-		 (#{id},#{name})
+		 (#{name})
 	</insert>
+
+	<select id="selUser" resultType="Integer">
+		select count(*) from sys_user;
+	</select>
 
 	<insert id="insertOrg" parameterType="com.sdstc.model.Org">
 		insert into sys_org
@@ -14,4 +18,7 @@
 		values
 		(#{id},#{name})
 	</insert>
+
+
+
 </mapper>

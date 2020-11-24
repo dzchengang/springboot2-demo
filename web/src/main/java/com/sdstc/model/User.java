@@ -11,4 +11,9 @@ public class User {
         this.id=id;
         this.name=name;
     }
+
+    public User(String name){
+        this.id=id;
+        this.name=name;
+    }
 }

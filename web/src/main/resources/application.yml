@@ -6,8 +6,12 @@ spring:
   datasource:
     username: root
     password: qwe123-=
-    url: jdbc:mysql://172.16.200.49:3306/test?characterEncoding=utf8&allowMultiQueries=true&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://172.16.10.145:30017/db1?characterEncoding=utf8&allowMultiQueries=true&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: 172.16.10.145
+    port: 31012
+    password: qwe123-=
 #日志
 logging:
   config: classpath:log4j2.xml

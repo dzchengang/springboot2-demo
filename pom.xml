@@ -31,7 +31,8 @@
 		<module>web</module>
 		<module>aliyun</module>
 		<module>webflux</module>
-    </modules>
+		<module>nettydemo</module>
+	</modules>
 
 	<dependencyManagement>
 		<dependencies>

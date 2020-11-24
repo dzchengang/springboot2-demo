@@ -6,4 +6,6 @@ import com.sdstc.model.User;
 public interface UserDao {
     Integer insertUser(User dto);
     Integer insertOrg(Org org);
+
+    Integer selUser();
 }
