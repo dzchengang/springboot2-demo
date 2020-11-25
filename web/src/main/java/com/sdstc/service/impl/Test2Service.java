@@ -17,8 +17,16 @@ public class Test2Service {
     @Autowired
     RedissonLock redissonLock;
 
+    /**
+     * 重新开启新事务
+     */
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void test()  {
+        userDao.insertUser(new User("cheng"));
+    }
+
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
+    public void test1()  {
         userDao.insertUser(new User("cheng"));
     }
 
