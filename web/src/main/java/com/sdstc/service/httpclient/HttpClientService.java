@@ -1,4 +1,4 @@
-package com.sdstc.service.transtional.impl;
+package com.sdstc.service.httpclient;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;

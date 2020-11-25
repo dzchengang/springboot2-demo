@@ -1,4 +1,4 @@
-package com.sdstc.service.transtional.impl;
+package com.sdstc.service.redis;
 
 import org.redisson.Redisson;
 import org.redisson.api.RLock;
@@ -15,7 +15,6 @@ public class RedissonLock {
 	/**
 	 * 加锁
 	 * @param key
-	 * @param value
 	 * @param timeout seconds
 	 * @return
 	 */

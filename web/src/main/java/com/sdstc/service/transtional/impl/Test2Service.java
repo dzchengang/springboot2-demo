@@ -2,6 +2,7 @@ package com.sdstc.service.transtional.impl;
 
 import com.sdstc.dao.UserDao;
 import com.sdstc.model.User;
+import com.sdstc.service.redis.RedissonLock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
