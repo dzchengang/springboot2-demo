@@ -17,4 +17,10 @@ public class PubController {
 		topicSender.send();
 		return "sucess";
 	}
+
+	@GetMapping("/sendReq2")
+	public String sendReq2() {
+		topicSender.send2();
+		return "sucess";
+	}
 }

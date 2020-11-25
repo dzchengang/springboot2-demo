@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sdstc.service.QuartzService;
-import com.sdstc.service.impl.MyJob;
+import com.sdstc.service.transtional.impl.MyJob;
 
 @RestController
 @RequestMapping("/")

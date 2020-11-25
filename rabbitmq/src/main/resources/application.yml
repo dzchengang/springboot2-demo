@@ -3,13 +3,16 @@ server:
 
 spring:
     rabbitmq:
-        host: 172.16.200.49
-        port: 5672
+        host: 172.16.10.145
+        port: 30001
         username: admin
         password: qwe123-=
-        publisherConfirms: true
+        publisher-confirms: true #确认消息已发送到交换机(Exchange)
+        publisher-returns: true #确认消息已发送到队列(Queue)
         listener:
-          direct:
-            acknowledge-mode: manual
           simple:
             acknowledge-mode: manual
+          direct:
+            acknowledge-mode: manual
+
+

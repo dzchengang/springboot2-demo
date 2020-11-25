@@ -1,20 +1,24 @@
-package com.sdstc.rabbitmq.topic;
+package com.sdstc.service.rabbitmq;
+
+import com.rabbitmq.client.Channel;
+import com.sdstc.dao.UserDao;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.Map;
-
-import org.springframework.amqp.core.Message;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.stereotype.Service;
-
-import com.rabbitmq.client.Channel;
 
 import static com.sdstc.config.RabbitConfig.TOPIC_QUEUE1;
 import static com.sdstc.config.RabbitConfig.TOPIC_QUEUE2;
 
 @Service
 public class TopicReceiver {
-	@RabbitListener(queues = TOPIC_QUEUE1)
+	@Autowired
+	private UserDao userDao;
+
+	//@RabbitListener(queues = TOPIC_QUEUE1)
 	public void receiveTopic1(Message message, Map<String,Object> map,Channel channel) throws IOException, InterruptedException {
 		long deliveryTag = message.getMessageProperties().getDeliveryTag();
 		System.out.println("queue1"+map.get("a"));
@@ -29,5 +33,14 @@ public class TopicReceiver {
 		System.out.println("queue2"+map.get("a"));
 		//第二个参数，true会重新放回队列，false会丢弃这条数据
 		channel.basicReject(deliveryTag, false);
+	}
+
+
+	@RabbitListener(queues = TOPIC_QUEUE1)
+	public void receiveTopic3(Message message, Map<String,Object> map,Channel channel) throws IOException, InterruptedException {
+		long deliveryTag = message.getMessageProperties().getDeliveryTag();
+		Integer count=userDao.selUser();
+		System.out.println(count);
+		channel.basicAck(deliveryTag,true);
 	}
 }

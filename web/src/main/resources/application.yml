@@ -12,6 +12,16 @@ spring:
     host: 172.16.10.145
     port: 31012
     password: qwe123-=
+  rabbitmq:
+    host: 172.16.10.145
+    port: 30001
+    username: admin
+    password: qwe123-=
+    publisher-confirms: true #确认消息已发送到交换机(Exchange)
+    publisher-returns: true #确认消息已发送到队列(Queue)
+    listener:
+      simple:
+        acknowledge-mode: manual
 #日志
 logging:
   config: classpath:log4j2.xml

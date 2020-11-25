@@ -1,6 +1,7 @@
 package com.sdstc.controller;
 
-import com.sdstc.service.TestService;
+import com.sdstc.service.event.EventService;
+import com.sdstc.service.transtional.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,10 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
     @Autowired
     private TestService testService;
+    @Autowired
+    private EventService eventService;
 
     @RequestMapping("/test")
     public String test(String id) {
-        testService.test(id);
+        testService.test1();
+       // eventService.test();
         return "a";
     }
 
