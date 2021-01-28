@@ -32,7 +32,10 @@
 		<module>aliyun</module>
 		<module>webflux</module>
 		<module>nettydemo</module>
-	</modules>
+		<module>mybatis-plus</module>
+        <module>flowable</module>
+		<module>clickhouse</module>
+    </modules>
 
 	<dependencyManagement>
 		<dependencies>

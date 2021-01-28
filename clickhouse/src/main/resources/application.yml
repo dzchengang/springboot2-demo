@@ -1,0 +1,9 @@
+server:
+ port: 8089
+ 
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    clickhouse:
+      driverClassName: ru.yandex.clickhouse.ClickHouseDriver
+      url: jdbc:clickhouse://172.16.10.145:8123/default
